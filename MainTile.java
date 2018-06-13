@@ -35,6 +35,18 @@ public class MainTile extends Tile {
 		// TODO Auto-generated method stub
 		
 	}
+
+	@Override
+	public void makeVisible() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void makeGrey() {
+		// TODO Auto-generated method stub
+		
+	}
 	
 	
 

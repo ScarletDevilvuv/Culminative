@@ -5,15 +5,16 @@ import java.awt.Toolkit;
 
 public class River extends Tile {
 	
-	private final Image RIVERIMAGE = Toolkit.getDefaultToolkit().getImage("River.png");
-	
+	private final Image RIVERIMAGE = Toolkit.getDefaultToolkit().getImage("grey_river.png");
+	private final Image GREYRIVERIMAGE = Toolkit.getDefaultToolkit().getImage("grey_river.png");
+
 	public River(int x, int y, char status) {
 		super(x, y, status);
 		this.foodGranted = (int)(Math.random() * (4) + 1);
 		this.buildingMaterialGranted = (int)(Math.random() * (4) + 1);
 		this.foodMaintenance = 1;
 		this.repairMaintenance = 1;
-		this.imageFileName = RIVERIMAGE;
+		this.imageFileName = BlackTile;
 		//There are three statuses:
 		//b = bought
 		//g = greyed-out
@@ -28,7 +29,7 @@ public class River extends Tile {
 		this.buildingMaterialGranted = (int)(Math.random() * (4) + 1);
 		this.foodMaintenance = 1;
 		this.repairMaintenance = 1;
-		this.imageFileName = RIVERIMAGE;
+		this.imageFileName = BlackTile;
 		//There are three statuses:
 		//b = bought
 		//g = greyed-out
@@ -49,5 +50,19 @@ public class River extends Tile {
 	}
 	public Image getImageFileName() {
 		return imageFileName;
+	}
+
+	@Override
+	public void makeVisible() {
+		this.setStatus('b');
+		this.imageFileName = RIVERIMAGE;		
+
+	}
+
+	@Override
+	public void makeGrey() {
+		this.setStatus('g');
+		this.imageFileName = GREYRIVERIMAGE;		
+		
 	}
 }

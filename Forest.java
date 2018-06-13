@@ -6,14 +6,15 @@ import java.awt.Toolkit;
 public class Forest extends Tile {
 	
 	private final Image FORESTIMAGE = Toolkit.getDefaultToolkit().getImage("forest.png");
-	
+	private final Image GREYFORESTIMAGE = Toolkit.getDefaultToolkit().getImage("grey_forest.png");
+
 	public Forest(int x, int y, char status) {
 		super(x, y, status);
 		this.foodGranted = 0;
 		this.buildingMaterialGranted = 2;
 		this.foodMaintenance = 1;
 		this.repairMaintenance = 0;
-		this.imageFileName = FORESTIMAGE;
+		this.imageFileName = BlackTile;
 		//There are three statuses:
 		//b = bought
 		//g = greyed-out
@@ -28,7 +29,7 @@ public class Forest extends Tile {
 		this.buildingMaterialGranted = 2;
 		this.foodMaintenance = 1;
 		this.repairMaintenance = 0;
-		this.imageFileName = FORESTIMAGE;
+		this.imageFileName = BlackTile;
 		//There are three statuses:
 		//b = bought
 		//g = greyed-out
@@ -45,7 +46,18 @@ public class Forest extends Tile {
 
 	@Override
 	public void draw() {
-		// TODO Auto-generated method stub
 		
+	}
+
+	@Override
+	public void makeVisible() {
+		this.setStatus('b');
+		this.imageFileName = FORESTIMAGE;		
+	}
+
+	@Override
+	public void makeGrey() {
+		this.setStatus('g');
+		this.imageFileName = GREYFORESTIMAGE;		
 	}
 }
