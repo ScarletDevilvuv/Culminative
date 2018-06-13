@@ -61,9 +61,9 @@ public class Logic {
 		//This line makes the main tile or camp visible, which starts the chain of what is visible and what isn't 
 		camp.visibilityCheck(gameBoard);
 
-		
-		
-		
+
+
+
 		for (int i = 0; i < BOARD_SIZE; i++){
 			for (int j = 0; j < BOARD_SIZE; j++){
 				System.out.print(gameBoard [i][j] + " ");;
@@ -84,7 +84,7 @@ public class Logic {
 	public void loseTile (Tile tile){
 		gameBoard[tile.getLocation().getArrayX()][tile.getLocation().getArrayY()].setStatus('g');
 	}
-	
+
 	public void endTurn (){
 		for (int i = 0; i < BOARD_SIZE; i++){
 			for (int j = 0; j < BOARD_SIZE; j++){
@@ -93,14 +93,14 @@ public class Logic {
 			}
 		}
 		if (isGameOver()){
-			
+
 		}else{
 			turnCounter++;
 		}
 	}
 
 
-	public boolean isGameOver (){
+	public static boolean isGameOver (){
 		if (resources.getFood() <= 0){
 			return true;
 		}else if (resources.getBuildingMaterial() <= 0){
@@ -109,7 +109,7 @@ public class Logic {
 			return false;
 		}
 	}
-	
+
 	public static Tile[][] getGameBoard() {
 		return gameBoard;
 	}
@@ -121,6 +121,6 @@ public class Logic {
 	}
 
 
-	
+
 
 }
