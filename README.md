@@ -10,4 +10,3 @@ June 14 Thursday 12:17
 -Bug Fixed Buttons on gameScreen class
 -Bug Found Logic class gameOver's output is not consistance (possible but unlikely reason, reset method not completed, likely reason resources management error)
 
--Bug update isGameOver method has issues
