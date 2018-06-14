@@ -5,7 +5,7 @@ import java.awt.Toolkit;
 
 public class River extends Tile {
 	
-	private final Image RIVERIMAGE = Toolkit.getDefaultToolkit().getImage("grey_river.png");
+	private final Image RIVERIMAGE = Toolkit.getDefaultToolkit().getImage("river.png");
 	private final Image GREYRIVERIMAGE = Toolkit.getDefaultToolkit().getImage("grey_river.png");
 
 	public River(int x, int y, char status) {

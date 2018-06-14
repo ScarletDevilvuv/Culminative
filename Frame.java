@@ -18,7 +18,7 @@ public class Frame {
 	private Menu menu = new Menu();
 	private GameScreen gameScreen = new GameScreen();
 	private Instructions instructions = new Instructions();
-	private GameOverMessage gameOverMessage = new GameOverMessage();
+	private static GameOverMessage gameOverMessage = new GameOverMessage();
 	private Logic logic;
 	
 	public Frame (){
@@ -50,6 +50,10 @@ public class Frame {
 	
 	public static CardLayout getCardLayout() {
 		return cardLayout;
+	}
+	
+	public static GameOverMessage getGameOverMessage() {
+		return gameOverMessage;
 	}
 	
 }

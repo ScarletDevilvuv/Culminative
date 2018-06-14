@@ -78,14 +78,12 @@ public class Logic {
 	}
 
 
-	public void buyTile (Tile tile){
-		Tile tileBought = gameBoard[tile.getLocation().getArrayX()][tile.getLocation().getArrayY()];
-		tileBought.setStatus('b');
-		tileBought.visibilityCheck(gameBoard);
-
+	public static void buyTile (Tile tile){
+		tile.makeVisible();
+		tile.visibilityCheck(gameBoard);
 	}
 
-	public void loseTile (Tile tile){
+	public static void loseTile (Tile tile){
 		gameBoard[tile.getLocation().getArrayX()][tile.getLocation().getArrayY()].setStatus('g');
 	}
 
@@ -109,7 +107,8 @@ public class Logic {
 	public static boolean isGameOver (){
 		if (resources.getFood() <= 0){
 			return true;
-		}else if (resources.getBuildingMaterial() <= 0){
+		}
+		if (resources.getBuildingMaterial() <= 0){
 			return true;
 		}else {
 			return false;
@@ -137,6 +136,17 @@ public class Logic {
 		return BOARD_SIZE;
 	}
 
+
+	public static ResourceManager getResources() {
+		return resources;
+	}
+
+
+	public static void setResources(ResourceManager resources) {
+		Logic.resources = resources;
+	}
+
+	
 
 
 

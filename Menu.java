@@ -97,7 +97,6 @@ public class Menu extends JPanel{
 				
 		//Action listeners for the buttons
 		newGame.addActionListener(new ActionListener() {
-			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				//TODO code reset every single variable
 				
@@ -107,7 +106,6 @@ public class Menu extends JPanel{
 		});
 		
 		loadGame.addActionListener(new ActionListener() {
-			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				//TODO code to read the variables from the file from the ubnfinished game
 				
@@ -117,7 +115,6 @@ public class Menu extends JPanel{
 		});
 		
 		instruction.addActionListener(new ActionListener() {
-			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				Frame.getCardLayout().show(Frame.getMainPanel(), "3");
 				
@@ -125,7 +122,6 @@ public class Menu extends JPanel{
 		});
 		
 		exitGame.addActionListener(new ActionListener() {
-			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				System.exit(0);
 				

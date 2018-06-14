@@ -14,11 +14,15 @@ public class GameScreen extends JPanel implements MouseListener{
 	private final Image marker = Toolkit.getDefaultToolkit().getImage("marker.png");
 	private int [] selectedTile = {325, 325};
 	private final Font buttonFont = new Font ("Arial", Font.PLAIN, 20);
+	private final Font buttonFont2 = new Font ("Arial", Font.PLAIN, 17);
 	private JButton saveGameButton;
 	private JButton upgradeButton;
 	private JButton endTurnButton;
 	private static Tile tileClickedOn;
 	private final Font dayCounterFont = new Font ("Arial", Font.BOLD, 35);
+	private final Font resourcesFont = new Font ("Arial", Font.PLAIN, 25);
+	private final Font upgradeFont = new Font ("Arial", Font.PLAIN, 20);
+
 
 	public GameScreen() {
 		this.setLayout(null);
@@ -28,7 +32,7 @@ public class GameScreen extends JPanel implements MouseListener{
 		addMouseListener(this);
 		setVisible (true);
 		saveGameButton = new JButton("Save Game");
-		upgradeButton = new JButton("Upgrade");
+		upgradeButton = new JButton("Buy or Upgrade");
 		endTurnButton = new JButton("End Turn");
 
 		saveGameButton.setBackground(Color.lightGray);
@@ -36,7 +40,7 @@ public class GameScreen extends JPanel implements MouseListener{
 		endTurnButton.setBackground(Color.lightGray);
 
 		saveGameButton.setFont(buttonFont);
-		upgradeButton.setFont(buttonFont);
+		upgradeButton.setFont(buttonFont2);
 		endTurnButton.setFont(buttonFont);
 
 		saveGameButton.setBounds(735,500,150,50);
@@ -87,19 +91,20 @@ public class GameScreen extends JPanel implements MouseListener{
 
 		//Action listeners for the buttons
 		endTurnButton.addActionListener(new ActionListener() {
-			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				Logic.endTurn();
 				repaint();
-				System.out.println(Logic.getTurnCounter());
 			}
 		});
 
 		upgradeButton.addActionListener(new ActionListener() {
-			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				if (tileClickedOn != null){
-					tileClickedOn.upgrade();
+					if (tileClickedOn.getStatus() == 'g'){
+						Logic.buyTile(tileClickedOn);
+					}else if (tileClickedOn.getStatus() == 'b'){
+						tileClickedOn.upgrade();
+					}
 				}
 				repaint();
 				System.out.println(Logic.getTurnCounter()); //TODO test case
@@ -120,9 +125,24 @@ public class GameScreen extends JPanel implements MouseListener{
 		}
 		
 		g.setColor(Color.white);
+		
+		g.setFont(resourcesFont);
+		g.drawString(Integer.toString(Logic.getResources().getFood()), 750, 160);
+		g.drawString(Integer.toString(Logic.getResources().getBuildingMaterial()), 750, 240);
+
 		g.setFont(dayCounterFont);
 		g.drawString(Integer.toString(Logic.getTurnCounter()), 830, 50);
 		g.drawImage(marker, selectedTile[0], selectedTile[1], this);
+		
+		if (tileClickedOn != null){
+			g.drawImage(tileClickedOn.getImageFileName(), 745, 294, this);
+			g.setFont(upgradeFont);
+			g.drawString("LV", 846, 315);
+			g.drawString(Integer.toString(tileClickedOn.getUpgradeLevel()), 846, 390);
+			g.drawString(Integer.toString(tileClickedOn.getFoodGranted()-tileClickedOn.getFoodMaintenance()), 795, 434);
+			g.drawString(Integer.toString(tileClickedOn.getBuildingMaterialGranted()-tileClickedOn.getRepairMaintenance()), 795, 469);
+
+		}
 	}
 	
 	// Get the coordination of the tile clicked
@@ -196,10 +216,9 @@ public class GameScreen extends JPanel implements MouseListener{
 		
 		repaint();
 		
-		tileClickedOn = Logic.getGameBoard() [tempY][tempX];
+		tileClickedOn = Logic.getGameBoard() [tempX][tempY];
 	}
 
-	@Override
 	public void mouseClicked(MouseEvent e) {
 		// TODO Auto-generated method stub
 		int mousePosX = e.getX();
@@ -209,25 +228,21 @@ public class GameScreen extends JPanel implements MouseListener{
 		
 	}
 
-	@Override
 	public void mousePressed(MouseEvent e) {
 		// TODO Auto-generated method stub
 
 	}
 
-	@Override
 	public void mouseReleased(MouseEvent e) {
 		// TODO Auto-generated method stub
 
 	}
 
-	@Override
 	public void mouseEntered(MouseEvent e) {
 		// TODO Auto-generated method stub
 
 	}
 
-	@Override
 	public void mouseExited(MouseEvent e) {
 		// TODO Auto-generated method stub
 

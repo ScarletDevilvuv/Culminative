@@ -166,11 +166,63 @@ abstract class Tile {
 	public Image getImageFileName() {
 		return imageFileName;
 	}
-
+	
+	public int getUpgradeLevel (){
+		return this.upgradeLv;
+	}
 	
 	abstract public void makeVisible ();
 	
 	abstract public void makeGrey ();
 
+
+
+	public int getFoodGranted() {
+		return foodGranted;
+	}
+
+
+
+	public void setFoodGranted(int foodGranted) {
+		this.foodGranted = foodGranted;
+	}
+
+
+
+	public int getBuildingMaterialGranted() {
+		return buildingMaterialGranted;
+	}
+
+
+
+	public void setBuildingMaterialGranted(int buildingMaterialGranted) {
+		this.buildingMaterialGranted = buildingMaterialGranted;
+	}
+
+
+
+	public int getFoodMaintenance() {
+		return foodMaintenance;
+	}
+
+
+
+	public void setFoodMaintenance(int foodMaintenance) {
+		this.foodMaintenance = foodMaintenance;
+	}
+
+
+
+	public int getRepairMaintenance() {
+		return repairMaintenance;
+	}
+
+
+
+	public void setRepairMaintenance(int repairMaintenance) {
+		this.repairMaintenance = repairMaintenance;
+	}
+
+	
 
 }
