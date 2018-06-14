@@ -1,5 +1,8 @@
 package com;
 
+import java.awt.Image;
+import java.awt.Toolkit;
+
 //There are three statuses of tiles:
 //b = bought
 //g = greyed-out
@@ -15,6 +18,7 @@ public class Logic {
 	private final static int BEGINNING_FOOD = 10;
 	private final static int BEGINNING_MATERIAL = 10;
 	private final static int BOARD_SIZE = 7; //change 101
+
 	//add view portion
 	private final static int CAMP_LOCATION = (BOARD_SIZE-1)/2;
 	private static int turnCounter;
@@ -61,9 +65,9 @@ public class Logic {
 		//This line makes the main tile or camp visible, which starts the chain of what is visible and what isn't 
 		camp.visibilityCheck(gameBoard);
 
-		
-		
-		
+
+
+
 		for (int i = 0; i < BOARD_SIZE; i++){
 			for (int j = 0; j < BOARD_SIZE; j++){
 				System.out.print(gameBoard [i][j] + " ");;
@@ -84,7 +88,7 @@ public class Logic {
 	public void loseTile (Tile tile){
 		gameBoard[tile.getLocation().getArrayX()][tile.getLocation().getArrayY()].setStatus('g');
 	}
-	
+
 	public static void endTurn (){
 		for (int i = 0; i < BOARD_SIZE; i++){
 			for (int j = 0; j < BOARD_SIZE; j++){
@@ -94,7 +98,8 @@ public class Logic {
 			}
 		}
 		if (isGameOver()){
-			
+			Frame.getCardLayout().show(Frame.getMainPanel(), "4");
+
 		}else{
 			turnCounter++;
 		}
@@ -106,16 +111,19 @@ public class Logic {
 			return true;
 		}else if (resources.getBuildingMaterial() <= 0){
 			return true;
-		}else{
+		}else {
 			return false;
 		}
 	}
-	
+
 	public static Tile[][] getGameBoard() {
 		return gameBoard;
 	}
 
+	//TODO Resets the game
+	public static void reset() {
 
+	}
 
 	public static void setGameBoard(Tile[][] gameBoard) {
 		Logic.gameBoard = gameBoard;
@@ -130,6 +138,6 @@ public class Logic {
 	}
 
 
-	
+
 
 }

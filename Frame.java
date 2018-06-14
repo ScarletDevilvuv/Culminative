@@ -18,6 +18,7 @@ public class Frame {
 	private Menu menu = new Menu();
 	private GameScreen gameScreen = new GameScreen();
 	private Instructions instructions = new Instructions();
+	private GameOverMessage gameOverMessage = new GameOverMessage();
 	private Logic logic;
 	
 	public Frame (){
@@ -36,6 +37,7 @@ public class Frame {
 		mainPanel.add(menu, "1");
 		mainPanel.add(gameScreen, "2");
 		mainPanel.add(instructions, "3");
+		mainPanel.add(gameOverMessage, "4");
 		
 		cardLayout.show(mainPanel, "1");
 		frame.add(mainPanel);

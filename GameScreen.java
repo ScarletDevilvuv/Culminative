@@ -13,12 +13,12 @@ public class GameScreen extends JPanel implements MouseListener{
 	private final Image HUD = Toolkit.getDefaultToolkit().getImage("HUD.png");
 	private final Image marker = Toolkit.getDefaultToolkit().getImage("marker.png");
 	private int [] selectedTile = {325, 325};
-	private Font buttonFont = new Font ("Arial", Font.PLAIN, 20);
+	private final Font buttonFont = new Font ("Arial", Font.PLAIN, 20);
 	private JButton saveGameButton;
 	private JButton upgradeButton;
 	private JButton endTurnButton;
 	private static Tile tileClickedOn;
-
+	private final Font dayCounterFont = new Font ("Arial", Font.BOLD, 35);
 
 	public GameScreen() {
 		this.setLayout(null);
@@ -27,8 +27,8 @@ public class GameScreen extends JPanel implements MouseListener{
 		this.addMouseListener(null);
 		addMouseListener(this);
 		setVisible (true);
-		saveGameButton = new JButton("Upgrade");
-		upgradeButton = new JButton("Save Game");
+		saveGameButton = new JButton("Save Game");
+		upgradeButton = new JButton("Upgrade");
 		endTurnButton = new JButton("End Turn");
 
 		saveGameButton.setBackground(Color.lightGray);
@@ -102,7 +102,7 @@ public class GameScreen extends JPanel implements MouseListener{
 					tileClickedOn.upgrade();
 				}
 				repaint();
-				System.out.println(Logic.getTurnCounter());
+				System.out.println(Logic.getTurnCounter()); //TODO test case
 			}
 		});
 
@@ -118,9 +118,13 @@ public class GameScreen extends JPanel implements MouseListener{
 				g.drawImage(Logic.getGameBoard()[verticalCount][horizontalCount].getImageFileName(), 26 + 100*verticalCount,25 + 100*horizontalCount, this);
 			}
 		}
-
+		
+		g.setColor(Color.white);
+		g.setFont(dayCounterFont);
+		g.drawString(Integer.toString(Logic.getTurnCounter()), 830, 50);
 		g.drawImage(marker, selectedTile[0], selectedTile[1], this);
 	}
+	
 	// Get the coordination of the tile clicked
 	public void tileClicked (int mousePosX, int mousePosY) {
 		int tempX = 0;
