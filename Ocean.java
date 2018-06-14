@@ -6,14 +6,15 @@ import java.awt.Toolkit;
 public class Ocean extends Tile {
 	
 	private final Image OCEANIMAGE = Toolkit.getDefaultToolkit().getImage("ocean.png");
-	
+	private final Image GREYOCEANIMAGE = Toolkit.getDefaultToolkit().getImage("grey_ocean.png");
+
 	public Ocean (int x, int y, char status) {
 		super(x, y, status);
 		this.foodGranted = 0;
 		this.buildingMaterialGranted = 0;
 		this.foodMaintenance = 0;
 		this.repairMaintenance = 0;
-		this.imageFileName = OCEANIMAGE;
+		this.imageFileName = GREYOCEANIMAGE;
 		//There are three statuses:
 		//b = bought
 		//g = greyed-out
@@ -28,7 +29,7 @@ public class Ocean extends Tile {
 		this.buildingMaterialGranted = 0;
 		this.foodMaintenance = 0;
 		this.repairMaintenance = 0;
-		this.imageFileName = OCEANIMAGE;
+		this.imageFileName = GREYOCEANIMAGE;
 		//There are three statuses:
 		//b = bought
 		//g = greyed-out
@@ -45,6 +46,18 @@ public class Ocean extends Tile {
 	@Override
 	public void draw() {
 		
+		
+	}
+
+	@Override
+	public void makeVisible() {
+		this.setStatus('s');
+		this.imageFileName = OCEANIMAGE;		
+	}
+
+	@Override
+	public void makeGrey() {
+		// TODO Auto-generated method stub
 		
 	}
 	

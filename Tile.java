@@ -1,8 +1,12 @@
 package com;
 
 import java.awt.Image;
+import java.awt.Toolkit;
+
 
 abstract class Tile {
+
+	private final Image BLACKIMAGE = Toolkit.getDefaultToolkit().getImage("black.png");
 
 	private char status; 
 	protected Coordinate location;
@@ -12,10 +16,13 @@ abstract class Tile {
 	protected int repairMaintenance;
 	protected Image imageFileName;
 	protected int upgradeLv;
+	protected Image ColourImageFileName;
+	protected Image BlackTile;
 	
 	public Tile (int x, int y, char status) {
 		location = new Coordinate (x, y);
 		this.status = status;
+		BlackTile = BLACKIMAGE;
 		upgradeLv = 1;
 		//There are three statuses:
 		//b = bought
@@ -46,12 +53,12 @@ abstract class Tile {
 		if (tileAbove != null){
 			if (tileAbove.getClass() != (new Ocean(0,0,'u')).getClass()){
 				if (tileAbove.getStatus() == 'u'){
-					tileAbove.setStatus('g');
+					tileAbove.makeGrey();
 				}
 
 			}else{				
 				if (tileAbove.getStatus() == 'u'){
-					tileAbove.setStatus('s');
+					tileAbove.makeVisible();
 				}
 			}
 		}
@@ -60,12 +67,12 @@ abstract class Tile {
 		if (tileBelow != null){
 			if (tileBelow.getClass() != (new Ocean(0,0,'u')).getClass()){
 				if (tileBelow.getStatus() == 'u'){
-					tileBelow.setStatus('g');
+					tileBelow.makeGrey();
 				}
 
 			}else{				
 				if (tileBelow.getStatus() == 'u'){
-					tileBelow.setStatus('s');
+					tileBelow.makeVisible();
 				}
 			}
 		}
@@ -74,12 +81,12 @@ abstract class Tile {
 		if (tileLeft != null){
 			if (tileLeft.getClass() != (new Ocean(0,0,'u')).getClass()){
 				if (tileLeft.getStatus() == 'u'){
-					tileLeft.setStatus('g');
+					tileLeft.makeGrey();
 				}
 
 			}else{
 				if (tileLeft.getStatus() == 'u'){
-					tileLeft.setStatus('s');
+					tileLeft.makeVisible();
 				}
 			}
 		}
@@ -88,12 +95,12 @@ abstract class Tile {
 		if (tileRight != null){
 			if (tileRight.getClass() != (new Ocean(0,0,'u')).getClass()){
 				if (tileRight.getStatus() == 'u'){
-					tileRight.setStatus('g');
+					tileRight.makeGrey();
 				}
 
 			}else{
 				if (tileRight.getStatus() == 'u'){
-					tileRight.setStatus('s');
+					tileRight.makeVisible();
 				}
 			}
 		}
@@ -156,5 +163,11 @@ abstract class Tile {
 	public Image getImageFileName() {
 		return imageFileName;
 	}
+
+	
+	abstract public void makeVisible ();
+	
+	abstract public void makeGrey ();
+
 
 }
