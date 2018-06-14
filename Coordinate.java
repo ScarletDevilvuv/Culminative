@@ -23,11 +23,11 @@ public class Coordinate {
 	}
 	
 	public int getGameX () {
-		return this.arrayX - Logic.getBoardSize();
+		return this.arrayX + 50;
 	}
 	
 	public int getGameY () {
-		return arrayY - Logic.getBoardSize();
+		return arrayY + 50;
 	}
 	
 	

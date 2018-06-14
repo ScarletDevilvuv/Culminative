@@ -139,8 +139,8 @@ public class GameScreen extends JPanel implements MouseListener{
 			g.setFont(upgradeFont);
 			g.drawString("LV", 846, 315);
 			g.drawString(Integer.toString(tileClickedOn.getUpgradeLevel()), 846, 390);
-			g.drawString(Integer.toString(tileClickedOn.getFoodGranted()-tileClickedOn.getFoodMaintenance()), 795, 434);
-			g.drawString(Integer.toString(tileClickedOn.getBuildingMaterialGranted()-tileClickedOn.getRepairMaintenance()), 795, 469);
+			g.drawString(Integer.toString(tileClickedOn.getFoodGranted()-tileClickedOn.getFoodMaintenance()), 795, 469);
+			g.drawString(Integer.toString(tileClickedOn.getBuildingMaterialGranted()-tileClickedOn.getRepairMaintenance()), 795, 434);
 
 		}
 	}

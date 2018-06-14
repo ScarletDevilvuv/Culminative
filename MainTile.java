@@ -12,8 +12,8 @@ public class MainTile extends Tile {
 		super(x, y, status);
 		this.foodGranted = 0;
 		this.buildingMaterialGranted = 0;
-		this.foodMaintenance = 2;
-		this.repairMaintenance = 2;
+		this.foodMaintenance = 1;
+		this.repairMaintenance = 1;
 		this.imageFileName = Toolkit.getDefaultToolkit().getImage("Base.png");
 		//There are three statuses:
 		//b = bought
@@ -45,6 +45,14 @@ public class MainTile extends Tile {
 	public void makeGrey() {
 
 	}
+	
+	public void upgrade (){
+		if (Logic.getTurnCounter() % 5 == 0){
+			upgradeLv++;
+			this.foodMaintenance += 1;
+			this.repairMaintenance += 1;
+		}
 
+	}
 
 }
