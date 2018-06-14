@@ -85,11 +85,12 @@ public class Logic {
 		gameBoard[tile.getLocation().getArrayX()][tile.getLocation().getArrayY()].setStatus('g');
 	}
 	
-	public void endTurn (){
+	public static void endTurn (){
 		for (int i = 0; i < BOARD_SIZE; i++){
 			for (int j = 0; j < BOARD_SIZE; j++){
 				gameBoard [i][j].maintenance(resources);
 				gameBoard [i][j].grantResources(resources);
+				gameBoard [i][j].visibilityCheck(gameBoard);
 			}
 		}
 		if (isGameOver()){
@@ -100,7 +101,7 @@ public class Logic {
 	}
 
 
-	public boolean isGameOver (){
+	public static boolean isGameOver (){
 		if (resources.getFood() <= 0){
 			return true;
 		}else if (resources.getBuildingMaterial() <= 0){
@@ -118,6 +119,14 @@ public class Logic {
 
 	public static void setGameBoard(Tile[][] gameBoard) {
 		Logic.gameBoard = gameBoard;
+	}
+
+	public static int getTurnCounter(){
+		return turnCounter;
+	}
+
+	public static int getBoardSize (){
+		return BOARD_SIZE;
 	}
 
 

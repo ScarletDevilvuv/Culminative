@@ -1,23 +1,111 @@
 package com;
 
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
-import javax.swing.JPanel;
+import javax.swing.*;
 
 public class GameScreen extends JPanel implements MouseListener{
 
 	private final Image HUD = Toolkit.getDefaultToolkit().getImage("HUD.png");
 	private final Image marker = Toolkit.getDefaultToolkit().getImage("marker.png");
 	private int [] selectedTile = {325, 325};
-	
-	
+	private Font buttonFont = new Font ("Arial", Font.PLAIN, 20);
+	private JButton saveGameButton;
+	private JButton upgradeButton;
+	private JButton endTurnButton;
+	private static Tile tileClickedOn;
+
+
 	public GameScreen() {
+		this.setLayout(null);
+
 		//have to use repaint
 		this.addMouseListener(null);
 		addMouseListener(this);
 		setVisible (true);
+		saveGameButton = new JButton("Upgrade");
+		upgradeButton = new JButton("Save Game");
+		endTurnButton = new JButton("End Turn");
+
+		saveGameButton.setBackground(Color.lightGray);
+		upgradeButton.setBackground(Color.lightGray);
+		endTurnButton.setBackground(Color.lightGray);
+
+		saveGameButton.setFont(buttonFont);
+		upgradeButton.setFont(buttonFont);
+		endTurnButton.setFont(buttonFont);
+
+		saveGameButton.setBounds(735,500,150,50);
+		this.add(saveGameButton);
+		upgradeButton.setBounds(735,575,150,50);
+		this.add(upgradeButton);
+		endTurnButton.setBounds(735,650,150,50);
+		this.add(endTurnButton);
+
+
+		//Mouse listener for button hover effect
+		saveGameButton.addMouseListener(new java.awt.event.MouseAdapter() {
+			public void mouseEntered(java.awt.event.MouseEvent evt) {
+				saveGameButton.setBackground(Color.BLACK);
+				saveGameButton.setForeground(Color.WHITE);
+			}
+
+			public void mouseExited(java.awt.event.MouseEvent evt) {
+				saveGameButton.setBackground(Color.lightGray);
+				saveGameButton.setForeground(Color.BLACK);
+			}
+		});
+
+		upgradeButton.addMouseListener(new java.awt.event.MouseAdapter() {
+			public void mouseEntered(java.awt.event.MouseEvent evt) {
+				upgradeButton.setBackground(Color.BLACK);
+				upgradeButton.setForeground(Color.WHITE);
+			}
+
+			public void mouseExited(java.awt.event.MouseEvent evt) {
+				upgradeButton.setBackground(Color.lightGray);
+				upgradeButton.setForeground(Color.BLACK);
+			}
+		});
+
+		endTurnButton.addMouseListener(new java.awt.event.MouseAdapter() {
+			public void mouseEntered(java.awt.event.MouseEvent evt) {
+				endTurnButton.setBackground(Color.BLACK);
+				endTurnButton.setForeground(Color.WHITE);
+			}
+
+			public void mouseExited(java.awt.event.MouseEvent evt) {
+				endTurnButton.setBackground(Color.lightGray);
+				endTurnButton.setForeground(Color.BLACK);
+			}
+		});
+
+
+		//Action listeners for the buttons
+		endTurnButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				Logic.endTurn();
+				repaint();
+				System.out.println(Logic.getTurnCounter());
+			}
+		});
+
+		upgradeButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				if (tileClickedOn != null){
+					tileClickedOn.upgrade();
+				}
+				repaint();
+				System.out.println(Logic.getTurnCounter());
+			}
+		});
+
 	}
 
 
@@ -34,7 +122,7 @@ public class GameScreen extends JPanel implements MouseListener{
 		g.drawImage(marker, selectedTile[0], selectedTile[1], this);
 	}
 	// Get the coordination of the tile clicked
-	public Tile tileClicked (int mousePosX, int mousePosY) {
+	public void tileClicked (int mousePosX, int mousePosY) {
 		int tempX = 0;
 		int tempY = 0;
 		int tempAlignedMousePosX = 0;
@@ -104,13 +192,16 @@ public class GameScreen extends JPanel implements MouseListener{
 		
 		repaint();
 		
-		return Logic.getGameBoard() [tempY][tempX];
+		tileClickedOn = Logic.getGameBoard() [tempY][tempX];
 	}
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		// TODO Auto-generated method stub
-		tileClicked (e.getX(), e.getY());
+		int mousePosX = e.getX();
+		int mousePosY = e.getY();
+		if (mousePosX >= 25 && mousePosX <= 725 && mousePosY >= 25 && mousePosY <= 725)
+			tileClicked (mousePosX, mousePosY);
 		
 	}
 
@@ -151,6 +242,10 @@ public class GameScreen extends JPanel implements MouseListener{
 			turnCounter++;
 			repaint();
 		}
+	}
+
+	public static Tile getTileClickedOn (){
+		return tileClickedOn;
 	}
 
 }
