@@ -11,7 +11,7 @@ import java.awt.Toolkit;
 
 public class Logic {
 
-	private static ArrayLocation_To_Position_Translator change;
+	public static ArrayLocation_To_Position_Translator change;
 	private static Tile[][] gameBoard;
 	private static MainTile camp;
 	private static ResourceManager resources;
@@ -148,18 +148,19 @@ public class Logic {
 		return BOARD_SIZE;
 	}
 
-
 	public static ResourceManager getResources() {
 		return resources;
 	}
-
 
 	public static void setResources(ResourceManager resources) {
 		Logic.resources = resources;
 	}
 
+	public static void loadGame(Tile [][] gameBoard) {
+		Logic.gameBoard = gameBoard;
+	}
 
-
-
-
+	public static void setTurnCounter (int turnCounter1){
+		turnCounter = turnCounter1;
+	}
 }

@@ -23,6 +23,21 @@ public class MainTile extends Tile {
 		
 	}
 
+	public MainTile (Coordinate c, char status) {
+		super(c, status);
+		this.foodGranted = 0;
+		this.buildingMaterialGranted = 0;
+		this.foodMaintenance = 1;
+		this.repairMaintenance = 1;
+		this.imageFileName = Toolkit.getDefaultToolkit().getImage("Base.png");;
+		//There are three statuses:
+		//b = bought
+		//g = greyed-out
+		//u = unseen
+		//s = seen (exclusive to Ocean)
+
+	}
+
 	@Override
 	public Coordinate getLocation() {
 		return super.location;

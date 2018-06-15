@@ -5,6 +5,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.io.*;
+
 
 import javax.swing.*;
 
@@ -18,10 +20,12 @@ public class GameScreen extends JPanel implements MouseListener{
 	private JButton saveGameButton;
 	private JButton upgradeButton;
 	private JButton endTurnButton;
+	private PrintWriter fileWriter;
 	private static Tile tileClickedOn;
 	private final Font dayCounterFont = new Font ("Arial", Font.BOLD, 35);
 	private final Font resourcesFont = new Font ("Arial", Font.PLAIN, 25);
 	private final Font upgradeFont = new Font ("Arial", Font.PLAIN, 20);
+
 
 
 	public GameScreen() {
@@ -90,10 +94,35 @@ public class GameScreen extends JPanel implements MouseListener{
 
 
 		//Action listeners for the buttons
-		endTurnButton.addActionListener(new ActionListener() {
+		saveGameButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				Logic.endTurn();
-				repaint();
+				try {
+					fileWriter = new PrintWriter(getFile());
+				}catch (IOException e){
+					System.out.println("There has been an error in the program.");
+					System.out.println(e);
+				}
+				StringBuilder stringToMake = new StringBuilder();
+				stringToMake.append(Logic.getTurnCounter());
+
+				for (int i = 0; i < Logic.getBoardSize(); i++){
+					for (int j = 0; j < Logic.getBoardSize(); j++){
+
+						Tile tileBeingSaved = Logic.getGameBoard()[i][j];
+
+						stringToMake.append("-" + tileBeingSaved.getClass().toString().substring(10));
+						stringToMake.append("-" + tileBeingSaved.getStatus());
+						stringToMake.append("-" + tileBeingSaved.getUpgradeLevel());
+						stringToMake.append("-" + tileBeingSaved.getFoodGranted());
+						stringToMake.append("-" + tileBeingSaved.getBuildingMaterialGranted());
+						stringToMake.append("-" + tileBeingSaved.getFoodMaintenance());
+						stringToMake.append("-" + tileBeingSaved.getRepairMaintenance());
+						stringToMake.append("-");
+
+					}//Inner loop
+				}//Outer loop
+				fileWriter.println(stringToMake.toString().trim());
+				fileWriter.close();
 			}
 		});
 
@@ -111,6 +140,12 @@ public class GameScreen extends JPanel implements MouseListener{
 			}
 		});
 
+		endTurnButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				Logic.endTurn();
+				repaint();
+			}
+		});
 	}
 
 
@@ -265,6 +300,14 @@ public class GameScreen extends JPanel implements MouseListener{
 
 	public static Tile getTileClickedOn (){
 		return tileClickedOn;
+	}
+
+	public static File getFile(){
+		File fileToReturn = null;
+		while (fileToReturn == null){
+			fileToReturn = new File(JOptionPane.showInputDialog("Enter the name of your Safe File: "));
+		}
+		return fileToReturn;
 	}
 
 }

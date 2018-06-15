@@ -22,7 +22,7 @@ public class Frame {
 	private Logic logic;
 	
 	public Frame (){
-		
+
 		logic = new Logic();
 		frame = new JFrame ();
 
@@ -54,6 +54,22 @@ public class Frame {
 	
 	public static GameOverMessage getGameOverMessage() {
 		return gameOverMessage;
+	}
+
+	public static JFrame getFrame(){
+		return frame;
+	}
+
+	public Logic getLogic (){
+		return logic;
+	}
+
+	public void resetGame (){
+		this.logic = new Logic();
+	}
+
+	public GameScreen gameScreen (){
+		return this.gameScreen;
 	}
 	
 }

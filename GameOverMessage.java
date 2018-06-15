@@ -38,6 +38,7 @@ public class GameOverMessage extends JPanel implements MouseListener{
 	
 	public void mouseClicked(MouseEvent e) {
 		// TODO Auto-generated method stub
+		Main.frame.resetGame();
 		Frame.getCardLayout().show(Frame.getMainPanel(), "1");
 	}
 

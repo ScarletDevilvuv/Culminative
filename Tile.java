@@ -116,16 +116,14 @@ abstract class Tile {
 
 	}
 
-	abstract public Coordinate getLocation ();
+	public Coordinate getLocation (){
+		return location;
+	}
 
 	abstract public void draw ();
 
 	public char getStatus() {
 		return status;
-	}
-
-	public void setStatus(char status) {
-		this.status = status;
 	}
 
 	public void setLocation(Coordinate location) {
@@ -151,7 +149,8 @@ abstract class Tile {
 	//This method upgrades the tile by increasing the upgrade Level, the maintenance and resources granted
 	public void upgrade (){
 		upgradeLv++;
-
+		Logic.getResources().setFood(Logic.getResources().getFood() - 3);
+		Logic.getResources().setBuildingMaterial(Logic.getResources().getBuildingMaterial() - 3);
 		if (this.foodGranted > 0 && this.buildingMaterialGranted > 0){
 			int randomNumber = (int)(Math.random() + 1);
 			switch (randomNumber){
@@ -167,11 +166,12 @@ abstract class Tile {
 
 		}else if (this.foodGranted > 0){
 			this.foodGranted += 2;
-			this.foodMaintenance += 1;
+			this.repairMaintenance += 1;
+
 
 		}else if(this.buildingMaterialGranted > 0){
 			this.buildingMaterialGranted += 2;
-			this.repairMaintenance += 1;
+			this.foodMaintenance += 1;
 		}
 	}
 
@@ -187,54 +187,46 @@ abstract class Tile {
 
 	abstract public void makeGrey ();
 
-
-
 	public int getFoodGranted() {
 		return foodGranted;
 	}
-
-
-
-	public void setFoodGranted(int foodGranted) {
-		this.foodGranted = foodGranted;
-	}
-
-
 
 	public int getBuildingMaterialGranted() {
 		return buildingMaterialGranted;
 	}
 
-
-
-	public void setBuildingMaterialGranted(int buildingMaterialGranted) {
-		this.buildingMaterialGranted = buildingMaterialGranted;
-	}
-
-
-
 	public int getFoodMaintenance() {
 		return foodMaintenance;
 	}
-
-
-
-	public void setFoodMaintenance(int foodMaintenance) {
-		this.foodMaintenance = foodMaintenance;
-	}
-
-
 
 	public int getRepairMaintenance() {
 		return repairMaintenance;
 	}
 
 
+	public void setUpgradeLv(int upgradeLv) {
+		this.upgradeLv = upgradeLv;
+	}
+
+	public void setFoodGranted(int foodGranted) {
+		this.foodGranted = foodGranted;
+	}
+
+	public void setBuildingMaterialGranted(int buildingMaterialGranted) {
+		this.buildingMaterialGranted = buildingMaterialGranted;
+	}
+
+	public void setFoodMaintenance(int foodMaintenance) {
+		this.foodMaintenance = foodMaintenance;
+	}
 
 	public void setRepairMaintenance(int repairMaintenance) {
 		this.repairMaintenance = repairMaintenance;
 	}
 
+	public void setStatus(char status) {
+		this.status = status;
+	}
 
 
 }
