@@ -148,30 +148,32 @@ abstract class Tile {
 
 	//This method upgrades the tile by increasing the upgrade Level, the maintenance and resources granted
 	public void upgrade (){
-		upgradeLv++;
-		Logic.getResources().setFood(Logic.getResources().getFood() - 3);
-		Logic.getResources().setBuildingMaterial(Logic.getResources().getBuildingMaterial() - 3);
-		if (this.foodGranted > 0 && this.buildingMaterialGranted > 0){
-			int randomNumber = (int)(Math.random() + 1);
-			switch (randomNumber){
-			case 1:
-				this.foodGranted += 1;
+		if (this.upgradeLv < 99){
+			upgradeLv++;
+			Logic.getResources().setFood(Logic.getResources().getFood() - 3);
+			Logic.getResources().setBuildingMaterial(Logic.getResources().getBuildingMaterial() - 3);
+			if (this.foodGranted > 0 && this.buildingMaterialGranted > 0){
+				int randomNumber = (int)(Math.random() + 1);
+				switch (randomNumber){
+				case 1:
+					this.foodGranted += 1;
+					this.repairMaintenance += 1;
+					break;
+				default:			
+					this.foodMaintenance += 1;
+					this.buildingMaterialGranted += 1;
+					break;
+				}
+
+			}else if (this.foodGranted > 0){
+				this.foodGranted += 2;
 				this.repairMaintenance += 1;
-				break;
-			default:			
+
+
+			}else if(this.buildingMaterialGranted > 0){
+				this.buildingMaterialGranted += 2;
 				this.foodMaintenance += 1;
-				this.buildingMaterialGranted += 1;
-				break;
 			}
-
-		}else if (this.foodGranted > 0){
-			this.foodGranted += 2;
-			this.repairMaintenance += 1;
-
-
-		}else if(this.buildingMaterialGranted > 0){
-			this.buildingMaterialGranted += 2;
-			this.foodMaintenance += 1;
 		}
 	}
 
