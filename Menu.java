@@ -129,6 +129,8 @@ public class Menu extends JPanel{
 				StringTokenizer tileTokenList = new StringTokenizer(loadedGame.toString(), "-");
 
 				int newTurnCounter = Integer.parseInt(tileTokenList.nextToken().toString());
+				int newFood = Integer.parseInt(tileTokenList.nextToken().toString());
+				int newBuildingMaterial = Integer.parseInt(tileTokenList.nextToken().toString());
 
 				for (int i = 0; i < Logic.getBoardSize(); i++){
 					for (int j = 0; j < Logic.getBoardSize(); j++){
@@ -177,6 +179,8 @@ public class Menu extends JPanel{
 				}
 
 				Logic.setTurnCounter(newTurnCounter);
+				Logic.getResources().setFood(newFood);
+				Logic.getResources().setBuildingMaterial(newBuildingMaterial);
 				Frame.getCardLayout().show(Frame.getMainPanel(), "2");//read from file first
 				
 			}

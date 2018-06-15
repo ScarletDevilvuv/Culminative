@@ -103,7 +103,7 @@ public class GameScreen extends JPanel implements MouseListener{
 					System.out.println(e);
 				}
 				StringBuilder stringToMake = new StringBuilder();
-				stringToMake.append(Logic.getTurnCounter());
+				stringToMake.append(Logic.getTurnCounter() + "-" + Logic.getResources().getFood() + "-" + Logic.getResources().getBuildingMaterial());
 
 				for (int i = 0; i < Logic.getBoardSize(); i++){
 					for (int j = 0; j < Logic.getBoardSize(); j++){
