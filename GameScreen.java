@@ -158,9 +158,9 @@ public class GameScreen extends JPanel implements MouseListener{
 				g.drawImage(Logic.getGameBoard()[verticalCount][horizontalCount].getImageFileName(), 26 + 100*verticalCount,25 + 100*horizontalCount, this);
 			}
 		}
-		
+
 		g.setColor(Color.white);
-		
+
 		g.setFont(resourcesFont);
 		g.drawString(Integer.toString(Logic.getResources().getFood()), 750, 160);
 		g.drawString(Integer.toString(Logic.getResources().getBuildingMaterial()), 750, 240);
@@ -168,7 +168,7 @@ public class GameScreen extends JPanel implements MouseListener{
 		g.setFont(dayCounterFont);
 		g.drawString(Integer.toString(Logic.getTurnCounter()), 830, 50);
 		g.drawImage(marker, selectedTile[0], selectedTile[1], this);
-		
+
 		if (tileClickedOn != null){
 			g.drawImage(tileClickedOn.getImageFileName(), 745, 294, this);
 			g.setFont(upgradeFont);
@@ -179,7 +179,7 @@ public class GameScreen extends JPanel implements MouseListener{
 
 		}
 	}
-	
+
 	// Get the coordination of the tile clicked
 	public void tileClicked (int mousePosX, int mousePosY) {
 		int tempX = 0;
@@ -215,7 +215,7 @@ public class GameScreen extends JPanel implements MouseListener{
 			tempAlignedMousePosX = 625;
 			tempX = 6;
 		}
-		
+
 		// y coordinate
 		if (mousePosY >= 25 && mousePosY <= 125) {
 			tempAlignedMousePosY = 25;
@@ -245,12 +245,12 @@ public class GameScreen extends JPanel implements MouseListener{
 			tempAlignedMousePosY = 625;
 			tempY = 6;
 		}
-		
+
 		selectedTile [0] = tempAlignedMousePosX;
 		selectedTile [1] = tempAlignedMousePosY;
-		
+
 		repaint();
-		
+
 		tileClickedOn = Logic.getGameBoard() [tempX][tempY];
 	}
 
@@ -260,7 +260,7 @@ public class GameScreen extends JPanel implements MouseListener{
 		int mousePosY = e.getY();
 		if (mousePosX >= 25 && mousePosX <= 725 && mousePosY >= 25 && mousePosY <= 725)
 			tileClicked (mousePosX, mousePosY);
-		
+
 	}
 
 	public void mousePressed(MouseEvent e) {
@@ -304,8 +304,14 @@ public class GameScreen extends JPanel implements MouseListener{
 
 	public static File getFile(){
 		File fileToReturn = null;
-		while (fileToReturn == null){
-			fileToReturn = new File(JOptionPane.showInputDialog("Enter the name of your Safe File: "));
+		try{
+			while (fileToReturn == null){
+				StringBuilder fileName = new StringBuilder (JOptionPane.showInputDialog("Enter the name of your Safe File: "));
+				fileToReturn = new File(fileName.toString());
+			}
+		}catch(NullPointerException e){
+			System.out.println("There was an error.");
+			System.out.println(e);
 		}
 		return fileToReturn;
 	}
